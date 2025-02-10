@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccountOwnerServer", "BankAccountOwnerServer\BankAccountOwnerServer.csproj", "{B73DBFB4-1C94-4E3D-92FB-28C25A722994}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{1CD5CFE2-97D5-46E6-BF07-F1A3CAB597C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingService", "LoggingService\LoggingService.csproj", "{027CB45E-992A-4FDA-830F-D71D53026544}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B73DBFB4-1C94-4E3D-92FB-28C25A722994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73DBFB4-1C94-4E3D-92FB-28C25A722994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B73DBFB4-1C94-4E3D-92FB-28C25A722994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B73DBFB4-1C94-4E3D-92FB-28C25A722994}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CD5CFE2-97D5-46E6-BF07-F1A3CAB597C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD5CFE2-97D5-46E6-BF07-F1A3CAB597C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD5CFE2-97D5-46E6-BF07-F1A3CAB597C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD5CFE2-97D5-46E6-BF07-F1A3CAB597C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027CB45E-992A-4FDA-830F-D71D53026544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027CB45E-992A-4FDA-830F-D71D53026544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027CB45E-992A-4FDA-830F-D71D53026544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027CB45E-992A-4FDA-830F-D71D53026544}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
