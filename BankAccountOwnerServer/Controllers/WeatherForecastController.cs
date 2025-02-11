@@ -1,3 +1,4 @@
+using Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankAccountOwnerServer.Controllers
@@ -6,28 +7,22 @@ namespace BankAccountOwnerServer.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly ILoggerManager _logger;
+        public WeatherForecastController(ILoggerManager logger)
         {
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<string> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            _logger.LogInfo("loginfo via weatherforcast controller get method");
+            _logger.LogDebug("logdebug via weatherforcast controller get method");
+            _logger.LogWarning("logwarning via weatherforcast controller get method");
+            _logger.LogError("logerror via weatherforcast controller get method");
+
+            return new string[] { "nlogs are filed to->", "C:\\Users\\dasmac\\source\\repos\\BankAccountOwnerServer\\BankAccountOwnerServer\\internal_logs" };
         }
+
     }
 }
