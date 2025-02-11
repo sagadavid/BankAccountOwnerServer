@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 LogManager.Setup().LoadConfigurationFromFile(string.
     Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 // Add services to the container.
+builder.Services.ConfigureMySqlContext(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.ConfigureCors();//cors step 2
 builder.Services.ConfigureIISIntegration();

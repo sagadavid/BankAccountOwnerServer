@@ -1,5 +1,7 @@
 ﻿using Contracts;
 using LoggingService;
+using Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankAccountOwnerServer.Extensions
 {
@@ -21,5 +23,14 @@ namespace BankAccountOwnerServer.Extensions
         public static void ConfigureLoggerService(this IServiceCollection services) =>
             services.AddSingleton<ILoggerManager, LoggerManager>();//singleton is used to create a single instance of the logger manager
 
+        public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration configuration)
+        {//iconfiguration is used to access the appsettings.json file
+            //var connectionString = configuration.["mysqlconnection:connectionString"];
+            var connectionString = configuration.GetConnectionString("mysqlconnection");
+            //msentityframeworkcore version should suit pomelo.entityframeworkcore.mysql version, otherwise erroring services.adddbcontext 
+            services.AddDbContext<RepositoryContext>(opts =>
+                   opts.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion));
+        }
+        
     }
 }
