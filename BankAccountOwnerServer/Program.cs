@@ -16,6 +16,7 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureMySqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryWrapper();//repository pattern last step
 builder.Services.AddTransient<MySqlConnectionTester>();//dependency injection for connection tester
+builder.Services.AddAutoMapper(typeof(Program));
 
 
 builder.Services.AddControllers();

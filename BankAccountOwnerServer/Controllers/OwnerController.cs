@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankAccountOwnerServer.Controllers
@@ -9,11 +10,13 @@ namespace BankAccountOwnerServer.Controllers
     {
         private readonly ILogger<OwnerController> _logger;
         private readonly IRepositoryWrapper _repository;
+        private readonly IMapper _mapper;
 
-        public OwnerController(ILogger<OwnerController> logger, IRepositoryWrapper repository)
+        public OwnerController(ILogger<OwnerController> logger, IRepositoryWrapper repository, IMapper mapper)
         {
             _logger = logger;
             _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -23,7 +26,10 @@ namespace BankAccountOwnerServer.Controllers
             {
                 var allOwners = _repository.Owner.GetAll();
                 _logger.LogInformation("Returned all owners from database.");
-                return Ok(allOwners);
+
+                var ownersResult = _mapper.Map<IEnumerable<OwnerDTO>>(allOwners);//so we filter out the account details from the owner details
+                //return Ok(allOwners);
+                return Ok(ownersResult);
             }
             catch (Exception ex)
             {
