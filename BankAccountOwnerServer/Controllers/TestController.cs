@@ -2,17 +2,17 @@
 using Entities;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/contest")]
 public class TestController : ControllerBase
 {
-    private readonly DatabaseService _databaseService;
+    private readonly MySqlConnectionTester _databaseService;
 
-    public TestController(DatabaseService databaseService)
+    public TestController(MySqlConnectionTester databaseService)
     {
         _databaseService = databaseService;
     }
 
-    [HttpGet("test-connection")]
+    [HttpGet]
     public async Task<IActionResult> TestConnection()
     {
         var result = await _databaseService.TestMySqlConnectionAsync();

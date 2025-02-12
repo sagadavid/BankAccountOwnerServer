@@ -15,7 +15,7 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureMySqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryWrapper();//repository pattern last step
-builder.Services.AddTransient<DatabaseService>();//dependency injection for database service
+builder.Services.AddTransient<MySqlConnectionTester>();//dependency injection for connection tester
 
 
 builder.Services.AddControllers();

@@ -1,19 +1,19 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 
-public class DatabaseService
+public class MySqlConnectionTester
 {
     private readonly IConfiguration _configuration;
 
-    public DatabaseService(IConfiguration configuration)
+    public MySqlConnectionTester(IConfiguration configuration)
     {
         _configuration = configuration;
     }
 
     public async Task<bool> TestMySqlConnectionAsync()
     {
-        var connectionString = _configuration.GetConnectionString("MySqlConnection");
-
+        //var connectionString = _configuration.GetConnectionString("MySqlConnectionStrings");
+        var connectionString = _configuration["MySqlConnectionStrings:DefaultConnection"];//fungerende maate aa hente connection string
         try
         {
             using (var connection = new MySqlConnection(connectionString))

@@ -28,8 +28,8 @@ namespace BankAccountOwnerServer.Extensions
         public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration configuration)
         {//iconfiguration is used to access the appsettings.json file
             
-            //var connectionString = configuration.["mysqlconnection:connectionString"];
-            var connectionString = configuration.GetConnectionString("mysqlconnection");
+            var connectionString = configuration["MySqlConnectionStrings:DefaultConnection"];
+            //var connectionString = configuration.GetConnectionString("MySqlConnectionStrings");
             
             //msentityframeworkcore version should suit pomelo.entityframeworkcore.mysql version, otherwise erroring services.adddbcontext 
             services.AddDbContext<RepositoryContext>(opts =>
