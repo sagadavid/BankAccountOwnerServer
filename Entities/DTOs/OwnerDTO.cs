@@ -10,9 +10,9 @@ namespace Entities.DTOs
     public class OwnerDTO
     {
         public Guid OwnerId { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         //obs!we wone show account details in the owner details
     }

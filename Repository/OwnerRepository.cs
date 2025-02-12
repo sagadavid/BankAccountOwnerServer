@@ -24,6 +24,7 @@ namespace Repository
         public Owner GetById(Guid ownerGuid)
         {
             return FindByCondition(owner => owner.OwnerId.Equals(ownerGuid)).FirstOrDefault();
+         
         }
     }
 }

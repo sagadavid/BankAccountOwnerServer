@@ -39,7 +39,7 @@ namespace BankAccountOwnerServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-
+        [HttpGet("{ownerGuid}")]
         public IActionResult GetOwnerById(Guid ownerGuid)
         {
             try
