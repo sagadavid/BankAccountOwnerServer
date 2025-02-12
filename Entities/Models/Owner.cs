@@ -22,7 +22,6 @@ namespace Entities.Models
         [StringLength(100, ErrorMessage = "Address can't be longer than 100 characters")]
         public string Address { get; set; } = string.Empty;
 
-
         public ICollection<Account>? Accounts { get; set; }
 }
 }

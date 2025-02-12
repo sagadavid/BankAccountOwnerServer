@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BankAccountOwnerServer.Controllers
 {
-    [Route("api/owner")]
+    [Route("api/owners")]
     [ApiController]
     public class OwnerController : Controller
     {
@@ -28,7 +28,7 @@ namespace BankAccountOwnerServer.Controllers
                 var allOwners = _repository.Owner.GetAll();
                 _logger.LogInformation("Returned all owners from database.");
 
-                var ownersResult = _mapper.Map<IEnumerable<OwnerDTO>>(allOwners);//so we filter out the account details from the owner details
+                var ownersResult = _mapper.Map<IEnumerable<OwnerDTO>>(allOwners);//so we filter out the account details from the allOwners details
                 //return Ok(allOwners);
                 return Ok(ownersResult);
             }
@@ -44,16 +44,16 @@ namespace BankAccountOwnerServer.Controllers
         {
             try
             {
-                var owner = _repository.Owner.GetById(ownerGuid);
-                if (owner == null)
+                var allOwners = _repository.Owner.GetById(ownerGuid);
+                if (allOwners == null)
                 {
                     _logger.LogError($"Owner with id: {ownerGuid}, hasn't been found in db.");
                     return NotFound();
                 }
                 else
                 {
-                    _logger.LogInformation($"Returned owner with id: {ownerGuid}");
-                    var ownerResult = _mapper.Map<OwnerDTO>(owner);
+                    _logger.LogInformation($"Returned allOwners with id: {ownerGuid}");
+                    var ownerResult = _mapper.Map<OwnerDTO>(allOwners);
                     return Ok(ownerResult);
                 }
             }
@@ -63,6 +63,33 @@ namespace BankAccountOwnerServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [HttpGet("{ownerGuid}/account")]
+        public IActionResult GetOwnerWithAccounts(Guid ownerGuid)
+        {
+            try
+            {
+                var allOwners = _repository.Owner.GetOwnerWithAccounts(ownerGuid);
+                if (allOwners == null)
+                {
+                    _logger.LogError($"Owner with id: {ownerGuid}, hasn't been found in db.");
+                    return NotFound();
+                }
+                else
+                {
+                    _logger.LogInformation($"Returned allOwners with accounts for id: {ownerGuid}");
+                    var ownerResult = _mapper.Map<OwnerDTO>(allOwners);
+                    return Ok(ownerResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside GetOwnerWithAccounts action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+
     }
 }
 

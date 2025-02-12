@@ -14,6 +14,7 @@ namespace Entities.DTOs
         public DateTime DateOfBirth { get; set; }
         public string? Address { get; set; }
 
-        //obs!we wone show account details in the owner details
+        public IEnumerable<AccountDTO>? Accounts { get; set; }
+
     }
 }

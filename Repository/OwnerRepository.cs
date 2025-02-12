@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Contracts;
 using Entities;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -25,6 +26,11 @@ namespace Repository
         {
             return FindByCondition(owner => owner.OwnerId.Equals(ownerGuid)).FirstOrDefault();
          
+        }
+
+        public Owner GetOwnerWithAccounts(Guid OwnerGuid) {
+            return FindByCondition(owner => owner.OwnerId.Equals(OwnerGuid))
+                .Include(owac => owac.Accounts).FirstOrDefault();
         }
     }
 }

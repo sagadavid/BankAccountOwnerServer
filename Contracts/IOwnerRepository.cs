@@ -11,5 +11,6 @@ namespace Contracts
     {
         IEnumerable<Owner> GetAll();
         Owner GetById(Guid ownerId);
+        Owner GetOwnerWithAccounts(Guid ownerId);
     }
 }

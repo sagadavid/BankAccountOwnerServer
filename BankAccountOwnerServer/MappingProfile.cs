@@ -7,7 +7,7 @@ namespace BankAccountOwnerServer
         public MappingProfile()
         {
             CreateMap<Entities.Models.Owner, Entities.DTOs.OwnerDTO>();
-            //CreateMap<Entities.Models.Account, Entities.DTOs.AccountDTO>();
+            CreateMap<Entities.Models.Account, Entities.DTOs.AccountDTO>();
         }
     }
 }
