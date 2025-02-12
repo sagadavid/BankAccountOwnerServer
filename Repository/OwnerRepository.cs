@@ -15,5 +15,10 @@ namespace Repository
             : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Owner> GetAll()
+        {
+            return FindAll().OrderBy(own=>own.Name).ToList();
+        }
     }
 }
