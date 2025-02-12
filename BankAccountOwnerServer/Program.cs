@@ -1,6 +1,8 @@
 using BankAccountOwnerServer.Extensions;
+using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
+using Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 

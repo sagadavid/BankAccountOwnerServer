@@ -10,5 +10,6 @@ namespace Contracts
     public interface IOwnerRepository : IRepositoryBase<Owner>
     {
         IEnumerable<Owner> GetAll();
+        Owner GetById(Guid ownerId);
     }
 }
