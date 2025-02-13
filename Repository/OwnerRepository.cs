@@ -19,16 +19,17 @@ namespace Repository
 
         public IEnumerable<Owner> GetAll()
         {
-            return FindAll().OrderBy(own=>own.Name).ToList();
+            return FindAll().OrderBy(own => own.Name).ToList();
         }
 
         public Owner GetById(Guid ownerGuid)
         {
             return FindByCondition(owner => owner.OwnerId.Equals(ownerGuid)).FirstOrDefault();
-         
+
         }
 
-        public Owner GetOwnerWithAccounts(Guid OwnerGuid) {
+        public Owner GetOwnerWithAccounts(Guid OwnerGuid)
+        {
             return FindByCondition(owner => owner.OwnerId.Equals(OwnerGuid))
                 .Include(owac => owac.Accounts).FirstOrDefault();
         }
@@ -41,6 +42,11 @@ namespace Repository
         public void UpdateOwner(Owner owner)
         {
             Update(owner);
+        }
+
+        public void DeleteOwner(Owner owner)
+        {
+            Delete(owner);
         }
     }
 }

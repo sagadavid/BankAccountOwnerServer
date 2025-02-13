@@ -40,7 +40,8 @@ namespace BankAccountOwnerServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpGet("{ownerGuid}", Name ="Owni")]
+
+        [HttpGet("{ownerGuid}", Name = "Owni")]
         public IActionResult GetOwnerById(Guid ownerGuid)
         {
             try
@@ -181,7 +182,37 @@ namespace BankAccountOwnerServer.Controllers
             }
         }
 
+        [HttpDelete("{ownerGuid}")]
+        public IActionResult DeleteOwner(Guid ownerGuid)
+        {
+            try
+            {
+                var owner = _repository.Owner.GetById(ownerGuid);
+                if (owner == null)
+                {
+                    _logger.LogError($"Owner with id: {ownerGuid}, hasn't been found in db.");
+                    return NotFound();
+                }
 
+                if (_repository.Account.AccountsByOwner(ownerGuid).Any())
+                {
+                    _logger.LogError($"Cannot delete owner with id: {ownerGuid}. It has related accounts. Delete those accounts first");
+                    return BadRequest("Cannot delete owner. It has related accounts. Delete those accounts first");
+                }
+
+                _repository.Owner.DeleteOwner(owner);
+                _repository.Save();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside DeleteOwner action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+
+
+        }
     }
 }
 

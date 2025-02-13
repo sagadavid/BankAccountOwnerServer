@@ -18,5 +18,7 @@ namespace Contracts
         void CreateOwner(Owner owner);
 
         void UpdateOwner(Owner owner);
+
+        void DeleteOwner(Owner owner);
     }
 }

@@ -15,5 +15,11 @@ namespace Repository
             : base(repositoryContext)
         { 
         }
+
+        //we need to get to accounts when we need to (cascade) delete an owner 
+        public IEnumerable<Account> AccountsByOwner(Guid ownerId)
+        {
+            return FindByCondition(a => a.OwnerId.Equals(ownerId)).ToList();
+        }
     }
 }
