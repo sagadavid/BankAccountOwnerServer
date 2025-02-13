@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.DTOs;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankAccountOwnerServer.Controllers
@@ -39,7 +40,7 @@ namespace BankAccountOwnerServer.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpGet("{ownerGuid}")]
+        [HttpGet("{ownerGuid}", Name ="Owni")]
         public IActionResult GetOwnerById(Guid ownerGuid)
         {
             try
@@ -85,6 +86,36 @@ namespace BankAccountOwnerServer.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong inside GetOwnerWithAccounts action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult CreateOwner([FromBody] OwnerForCreationDTO owner)
+        {
+            try
+            {
+                if (owner == null)
+                {
+                    _logger.LogError("Owner object sent from client is null.");
+                    return BadRequest("Owner object is null");
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid owner object sent from client.");
+                    return BadRequest("Invalid model object");
+                }
+                var ownerEntity = _mapper.Map<Owner>(owner);
+                _repository.Owner.CreateOwner(ownerEntity);
+                _repository.Save();
+                var createdOwner = _mapper.Map<OwnerDTO>(ownerEntity);
+
+                //result header localtion will be formed according to "Owni" Get-request above
+                return CreatedAtRoute("Owni", new { ownerGuid = createdOwner.OwnerId }, createdOwner);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside CreateOwner action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
         }

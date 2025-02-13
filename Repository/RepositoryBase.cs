@@ -16,6 +16,7 @@ namespace Repository
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) =>
             RepositoryContext.Set<T>().Where(expression).AsNoTracking();
 
+        //ability to create is made possible originally by DBContext.DbSet.Add() method lies in RepositoryContext
         public void Create(T entity) => RepositoryContext.Set<T>().Add(entity);
 
         public void Update(T entity) => RepositoryContext.Set<T>().Update(entity);

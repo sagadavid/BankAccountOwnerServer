@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Entities.DTOs;
+using Entities.Models;
 
 namespace BankAccountOwnerServer
 {
@@ -6,8 +8,11 @@ namespace BankAccountOwnerServer
     {
         public MappingProfile()
         {
-            CreateMap<Entities.Models.Owner, Entities.DTOs.OwnerDTO>();
-            CreateMap<Entities.Models.Account, Entities.DTOs.AccountDTO>();
+            CreateMap<Owner, OwnerDTO>();
+
+            CreateMap<Account, AccountDTO>();
+            
+            CreateMap<OwnerForCreationDTO, Owner>();//notice direction of mapping here
         }
     }
 }

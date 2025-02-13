@@ -10,7 +10,11 @@ namespace Contracts
     public interface IOwnerRepository : IRepositoryBase<Owner>
     {
         IEnumerable<Owner> GetAll();
+        
         Owner GetById(Guid ownerId);
+        
         Owner GetOwnerWithAccounts(Guid ownerId);
+
+        void CreateOwner(Owner owner);
     }
 }
