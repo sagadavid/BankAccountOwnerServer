@@ -16,5 +16,7 @@ namespace Contracts
         Owner GetOwnerWithAccounts(Guid ownerId);
 
         void CreateOwner(Owner owner);
+
+        void UpdateOwner(Owner owner);
     }
 }

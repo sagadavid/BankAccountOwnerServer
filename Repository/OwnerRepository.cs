@@ -37,5 +37,10 @@ namespace Repository
         {
             Create(owner);
         }
+
+        public void UpdateOwner(Owner owner)
+        {
+            Update(owner);
+        }
     }
 }

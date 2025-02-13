@@ -120,6 +120,67 @@ namespace BankAccountOwnerServer.Controllers
             }
         }
 
+        [HttpPut("{ownerGuid}")]
+        public IActionResult UpdateOwner(Guid ownerGuid, [FromBody] OwnerForUpdateDTO owner)
+        {
+            try
+            {
+                if (owner == null)
+                {
+                    _logger.LogError("Owner object sent from client is null.");
+                    return BadRequest("Owner object is null");
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogError("Invalid owner object sent from client.");
+                    return BadRequest("Invalid model object");
+                }
+                var ownerEntity = _repository.Owner.GetById(ownerGuid);
+                if (ownerEntity == null)
+                {
+                    _logger.LogError($"Owner with id: {ownerGuid}, hasn't been found in db.");
+                    return NotFound();
+                }
+                _mapper.Map(owner, ownerEntity);
+
+                _repository.Owner.UpdateOwner(ownerEntity);
+                _repository.Save();
+
+                //return NoContent();
+
+                //Alternative 1
+
+                //string locationUrl = Url.Action("GetOwnerById", new { ownerGuid = ownerGuid });
+
+                //var responseForUpdate = new ObjectResult(new
+                //{
+                //    message = "Owner updated successfully",
+                //    updatedOwner = ownerEntity,
+                //    localtionUrl = locationUrl
+                //})
+                //{ StatusCode = 204 };
+
+                //Response.Headers["Location"] = locationUrl;
+                //return responseForUpdate;
+
+                //Alternative 2
+
+                string locationUrl = Url.Action("GetOwnerById", new { ownerGuid = ownerGuid });
+                return Accepted(locationUrl, new
+                {
+                    message = "update accepted !",
+                    UpdateOwner = ownerEntity,
+                    locationUrl
+                });
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong inside UpdateOwner action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
 
     }
 }
